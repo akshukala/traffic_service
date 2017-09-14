@@ -12,6 +12,8 @@ from trafficservice.session.interfaces import DBInterface
 from flask.ext.cors import CORS
 
 from trafficservice.service_apis.ping import Ping
+from trafficservice.service_apis.city import Cities
+from trafficservice.service_apis.junction import Junctions
 
 close_old_connections()
 init_pool()
@@ -29,8 +31,8 @@ setup_config_logger(app)
 
 app.logger.info("Setting up Resources")
 api.add_resource(Ping,'/trafficservice/ping/')
-
-
+api.add_resource(Cities, '/trafficservice/city/')
+api.add_resource(Junctions,'/trafficservice/junction/')
 app.logger.info("Resource setup done")
 
 if __name__ == '__main__':
