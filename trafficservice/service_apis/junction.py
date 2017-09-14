@@ -11,11 +11,11 @@ from trafficservice.utils.auth import get_user
 class Junctions(Resource):
     
     def get(self):
-        type = request.args.get('type')
-        if int(type) == 1:
-         return [{
+        if int(request.args.get('type')) == 1:
+            print request.args.get('city')
+            return [{
                     "junction_id":junction.id,
-                    "junction_name":str(junction.company_name)
+                    "junction_name":str(junction.junction_name)
                     }
                     for junction in Junction.objects.filter(city__city_name =request.args.get('city'), is_active=True)]
         else:
@@ -41,16 +41,14 @@ class Junctions(Resource):
                     }
                     for junction in Junction_data.objects.filter(junction=int(request.args.get('id')))]
 
-    get.authenticated = False
 
 
     def post(self):
         request_data = request.get_json(force=True)
-        print request.form['junction_name']
         try:
-            Junction.objects.get_or_create(junction_name=str(request.form['junction_name']),
-                                        city = City.objects.get(id=int(request_data['city'])),
-                                        # created_by=get_user(), modified_on=get_user(),
+            Junction.objects.get_or_create(junction_name=str(request_data['junction_name']),
+                                        city = City.objects.get(city_name=str(request_data['city'])),
+                                        created_by=get_user(), modified_by=get_user(),
                                         is_active = True)
 
             # Junction.objects.create(junction_name=str(request.form['junction_name']),
@@ -72,9 +70,8 @@ class Junctions(Resource):
             #                             total_cycle_time2 = int(request.form['total_cycle_time2']),
             #                             mode = int(request.form['mode']),
             #                             is_active = True)
-            return {"responseCode":"200",
+            return {"responseCode":200,
                     "Message":"""Success"""}
         except:
-            return {"responseCode":"400",
+            return {"responseCode":400,
                     "Message":"""Something went wrong"""}
-    post.authenticated = False
