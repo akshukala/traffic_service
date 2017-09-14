@@ -22,7 +22,8 @@ class Cities(Resource):
 
     def post(self):
         try:
-            City.objects.get_or_create(city_name=str(request.args.get('city_name')), created_by=get_user(), modified_on=get_user())
+            City.objects.get_or_create(city_name=str(request.args.get('city_name')))
+                                        # created_by=get_user(), modified_on=get_user())
             return {"responseCode":"200",
                     "Message":"""Success"""}
         except:
