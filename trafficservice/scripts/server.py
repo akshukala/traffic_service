@@ -28,11 +28,10 @@ class ClientThread(Thread):
                 # data2 = self.sock.recv(1024)
                 # file_data = file_data + str(data2)
                 while True: 
-                    chunck = self.sock.recv(1024)
-                    if not chunck: 
+                    part = self.sock.recv(BUFFER_SIZE)
+                    file_data += part
+                    if part < BUFFER_SIZE:
                         break
-                    fragments.append(chunck)
-                file_data = "".join(fragments)
         
                 
                 print file_data
