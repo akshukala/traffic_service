@@ -15,18 +15,25 @@ class ClientThread(Thread):
         self.sock = sock
         print " New thread started for "+ip+":"+str(port)
 
+    def recvall(sock, buffer_size=4096):
+        buf = sock.recv(buffer_size)
+        while buf:
+            yield buf
+            buf = sock.recv(buffer_size)
     def run(self):
         
         while True:
             file_data = ''
             try:
-                data1 = self.sock.recv(1024)
-                file_data = file_data + str(data1)
-                data2 = self.sock.recv(1024)
-                file_data = file_data + str(data2)
+                # data1 = self.sock.recv(1024)
+                # file_data = file_data + str(data1)
+                # data2 = self.sock.recv(1024)
+                # file_data = file_data + str(data2)
+                file_data = ''.join(recvall(self.sock))
+                print file_data
                 file_data = file_data.strip()
                 file_list = file_data.split('&')
-                print file_list
+                #print file_list
                 if file_data != '':
                     if file_data.startswith("NUC") and file_data.endswith("CUN"):
                         year = file_list[6] + file_list[7]
