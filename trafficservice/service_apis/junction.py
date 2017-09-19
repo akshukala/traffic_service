@@ -1,5 +1,6 @@
 import os
 import time
+import json
 from flask import current_app as app
 from flask import Flask, redirect
 from flask.globals import request
@@ -19,7 +20,7 @@ class Junctions(Resource):
                     }
                     for junction in Junction.objects.filter(city__city_name =request.args.get('city'), is_active=True)]
         else:
-            return [{
+             return [{
                     "junction_id":junction.id,
                     "junction_name":str(junction.junction.junction_name),
                     "hour": junction.hour,
@@ -36,18 +37,26 @@ class Junctions(Resource):
                     "cycle_elased_time2":junction.cycle_elased_time2,
                     "working_on":junction.working_on,
                     "mode":junction.mode,
-                    "pahse1":junction.phase1,
-                    "pahse2":junction.phase2,
-                    "pahse3":junction.phase3,
-                    "pahse4":junction.phase4,
-                    "pahse5":junction.phase5,
-                    "pahse6":junction.phase6,
-                    "pahse7":junction.phase7,
-                    "pahse8":junction.phase8,
+                    "phase1":junction.phase1,
+                    "phase2":junction.phase2,
+                    "phase3":junction.phase3,
+                    "phase4":junction.phase4,
+                    "phase5":junction.phase5,
+                    "phase6":junction.phase6,
+                    "phase7":junction.phase7,
+                    "phase8":junction.phase8,
+                    "road1": junction.junction.road_name1,
+                    "road2": junction.junction.road_name2,
+                    "road3": junction.junction.road_name3,
+                    "road4": junction.junction.road_name4,
+                    "road5": junction.junction.road_name5,
+                    "road6": junction.junction.road_name6,
+                    "road7": junction.junction.road_name7,
+                    "road8": junction.junction.road_name8,
                     "total_cycle_time1":junction.total_cycle_time1,
                     "total_cycle_time2":junction.total_cycle_time2
                     }
-                    for junction in Junction_data.objects.filter(junction=int(request.args.get('id')))]
+                    for junction in [Junction_data.objects.filter(junction=int(request.args.get('junction'))).latest('id')]]
 
 
 
