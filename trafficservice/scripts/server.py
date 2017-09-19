@@ -29,7 +29,11 @@ class ClientThread(Thread):
                 print file_list
                 if file_data != '':
                     if file_data.startswith("NUC") and file_data.endswith("CUN"):
-                        print "KK file"
+                        year = file_list[6] + file_list[7]
+                        city_name = file_list[38] + file_list[39] + file_list[40] + file_list[41] + file_list[42]
+                        junction_name = file_list[33] + file_list[34] + file_list[35] + file_list[36] + file_list[37]
+                        print city_name
+                        print junction_name
                     else:
                         print "wrong file"
                 else:
