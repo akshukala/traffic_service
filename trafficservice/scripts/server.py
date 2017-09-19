@@ -15,34 +15,36 @@ class ClientThread(Thread):
         self.sock = sock
         print " New thread started for "+ip+":"+str(port)
 
-    def recvall(sock):
-        BUFF_SIZE = 4096 # 4 KiB
-        data = ""
-        while True:
-            part = sock.recv(BUFF_SIZE)
-            data += part
-            if part < BUFF_SIZE:
-            # either 0 or end of data
-                break
-        return data
+    # def recvall(sock):
+    #     BUFF_SIZE = 4096 # 4 KiB
+    #     data = ""
+    #     while True:
+    #         part = sock.recv(BUFF_SIZE)
+    #         data += part
+    #         if part < BUFF_SIZE:
+    #         # either 0 or end of data
+    #             break
+    #     return data
 
         
 
     def run(self):
         
         while True:
-            #file_data = ''
+            file_data = ''
             try:
                 # data1 = self.sock.recv(1024)
                 # file_data = file_data + str(data1)
                 # data2 = self.sock.recv(1024)
                 # file_data = file_data + str(data2)
-                # while True: 
-                #     part = self.sock.recv(BUFFER_SIZE)
-                #     file_data += part
-                #     if part < BUFFER_SIZE:
-                #         break
-                file_data = recvall(self.sock)
+                while True: 
+                    part = self.sock.recv(BUFFER_SIZE)
+                    file_data += part
+                    if part !='':
+                        file_data += part
+                    else:
+                        break
+                #file_data = recvall(self.sock)
                 
                 print file_data
                 file_data = file_data.strip()
