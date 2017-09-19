@@ -16,10 +16,14 @@ class ClientThread(Thread):
         print " New thread started for "+ip+":"+str(port)
 
     def recvall(sock, buffer_size=4096):
-        buf = sock.recv(buffer_size)
-        while buf:
-            yield buf
-            buf = sock.recv(buffer_size)
+        while True: 
+            chunck = sock.recv(buffer_size)
+            if not chunck: 
+                break
+            fragments.append(chunck)
+        data = "".join(fragments)
+        return data
+
     def run(self):
         
         while True:
@@ -29,7 +33,7 @@ class ClientThread(Thread):
                 # file_data = file_data + str(data1)
                 # data2 = self.sock.recv(1024)
                 # file_data = file_data + str(data2)
-                file_data = ''.join(recvall(self.sock))
+                file_data = recvall(self.sock)
                 print file_data
                 file_data = file_data.strip()
                 file_list = file_data.split('&')
