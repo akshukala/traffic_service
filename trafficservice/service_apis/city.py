@@ -18,7 +18,8 @@ class Cities(Resource):
             city = []
 
         return list(set(city))
-
+        
+    #get.authenticated = False
     def post(self):
         try:
             request_data = request.get_json(force=True)

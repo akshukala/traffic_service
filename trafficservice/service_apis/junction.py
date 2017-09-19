@@ -36,6 +36,14 @@ class Junctions(Resource):
                     "cycle_elased_time2":junction.cycle_elased_time2,
                     "working_on":junction.working_on,
                     "mode":junction.mode,
+                    "pahse1":junction.phase1,
+                    "pahse2":junction.phase2,
+                    "pahse3":junction.phase3,
+                    "pahse4":junction.phase4,
+                    "pahse5":junction.phase5,
+                    "pahse6":junction.phase6,
+                    "pahse7":junction.phase7,
+                    "pahse8":junction.phase8,
                     "total_cycle_time1":junction.total_cycle_time1,
                     "total_cycle_time2":junction.total_cycle_time2
                     }
@@ -48,6 +56,14 @@ class Junctions(Resource):
         try:
             Junction.objects.get_or_create(junction_name=str(request_data['junction_name']),
                                         city = City.objects.get(city_name=str(request_data['city'])),
+                                        road_name1 = str(request_data['road_name1']),
+                                        road_name2 = str(request_data['road_name2']),
+                                        road_name3 = str(request_data['road_name3']),
+                                        road_name4 = str(request_data['road_name4']),
+                                        road_name5 = str(request_data['road_name5']),
+                                        road_name6 = str(request_data['road_name6']),
+                                        road_name7 = str(request_data['road_name7']),
+                                        road_name8 = str(request_data['road_name8']),
                                         created_by=get_user(), modified_by=get_user(),
                                         is_active = True)
 
