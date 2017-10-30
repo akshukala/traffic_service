@@ -41,8 +41,8 @@ class ClientThread(Thread):
                             hour=int(file_list[1]), minute=int(file_list[2]), second=int(file_list[3]), day=int(file_list[4]),
                             month=int(file_list[5]), year=int(year), phase_no=int(file_list[10]), status=str(file_list[11]),
                             mode=str(file_list[8]), normal_time=int(file_list[17]), step_elased_time=int(file_list[19]),
-                            cycle_elased_time1=int(file_list[20]), cycle_elased_time2=int(file_list[21]),
-                            working_on=str(file_list[22]), total_cycle_time1=int(file_list[23]), total_cycle_time2=int(file_list[24]),
+                            cycle_elased_time1=str(file_list[20]), cycle_elased_time2=str(file_list[21]),
+                            working_on=str(file_list[22]), total_cycle_time1=str(file_list[23]), total_cycle_time2=str(file_list[24]),
                             phase1=str(file_list[25]), phase2=str(file_list[26]), phase3=str(file_list[27]), phase4=str(file_list[28]),
                             phase5=str(file_list[29]), phase6=str(file_list[30]), phase7=str(file_list[31]), phase8=str(file_list[32]))
                     else:
